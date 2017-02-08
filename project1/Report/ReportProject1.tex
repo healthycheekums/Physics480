@@ -36,7 +36,7 @@ and a closed form solution with the Dirichlet boundary conditions:
 	\end{equation}
 
 	\subsection{Solving a Tridiagonal Matrix}	
-We can write a simple program that uses forward (\ref{forward}) and backward (\ref{backward}) substitutions to solve the set of linear equations.
+We can write a simple program that uses forward and backward substitutions to solve the set of linear equations.
 	
 	\begin{equation}
 	\tilde{f}_{i}=f_{i}-\frac{\tilde{f}_{i-1}e_{i-1}}{\tilde{d}_{i-1}} ; \tilde{d}_{i}=d_{i}-e^{2}_{i-1}/\tilde{d}_{i-1}
@@ -54,12 +54,12 @@ where $d_{i}$ are the diagonal matrix elements and $e_{i}$ are the off diagonal 
 We were able to create another program that performed matrix mathematics to solve for the set of linear equations.  Taking a tridiagonal matrix, we can solve it using LU decomposition.
 	
 	
-	\begin{figure}[!ht]
-			\centering
-			
-			\label{ludecomp}
-			\caption{The code to find the inverse of a matrix utilizing LU decomposition}
-		\end{figure}
+	%\begin{figure}[!ht]
+	%		\centering
+	%		
+	%		\label{ludecomp}
+	%		\caption{The code to find the inverse of a matrix utilizing LU decomposition}
+	%	\end{figure}
 
 \section{Algorithms}	
 
@@ -81,26 +81,31 @@ $u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
 %insert path specific for computer
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out1.pdf}
+	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out1.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/healthycheekums/Physics480/project1/Report/out1.pdf}
 	\label{uvx}
 	\caption{ n = 1. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out2.pdf}
+	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out2.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/healthycheekums/Physics480/project1/Report/out2.pdf}
+
 	\label{uvx}
 	\caption{n = 2. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
-	\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out3.pdf}
+	%\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out3.pdf}
+	\includegraphics[width=0.5\textwidth]{/home/healthycheekums/Physics480/project1/Report/out3.pdf}
+
 	\label{uvx}
 	\caption{n =3.  The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
 
-Further investigation shows that the overabundance of data points does give us the full curve, it also results in a much larger error, as shown in Table 3. There seems to be a saddle point situated around N=$10^{2}$, wherein the calculation is optimized in regard to completeness of the graph and uncertainty from the numerical solution.
+Further investigation shows that the overabundance of data points does give us the full curve, it also results in a much larger error, as shown in the table below. There seems to be a saddle point situated around N=$10^{2}$, wherein the calculation is optimized in regard to completeness of the graph and uncertainty from the numerical solution.
 
 \begin{center}
 	\begin{tabular}{cc}
