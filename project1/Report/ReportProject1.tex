@@ -18,7 +18,7 @@ As an introduction to the central ideas of the class, we studied the one-dimensi
 
 \section{Theory}
 	\subsection{Theoretical solution of the one dimensional Poisson equation}	
-In general, The one dimensional Poisson equation reads as follows: \begin{equation} -u^{''}(x) = f(x)     \end{equation}  Through discretized approximation of {\it u}, we can solve for {\it f} using a set of linear equations: \begin{equation}
+In general, the one dimensional Poisson equation reads as follows: \begin{equation} -u^{''}(x) = f(x)     \end{equation}  Through discretized approximation of {\it u}, we can solve for {\it f} using a set of linear equations: \begin{equation}
 	f(x)=-\frac{v_{i+1}+u_{i-1}-2u_{i}}{h^{2}}      ;      i=1,...,n
 	\end{equation}
 Using Dirichlet boundary conditions, $u_{0}$  = $u_{n+1}$ = 0,  We can then rewrite this as a set of linear equations in the form of a tridiagonal matrix: \begin{equation}	
@@ -74,36 +74,33 @@ $u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
 
 \section{Results and discussions}
 
-  By running the program for different step sizes with x in a range [0,1], we can see how the data changes with data points.    We can see from the plot, that without enough data points we cannot produce the full curve, but with too many data points we recieve a larger error.  This provides us with the knowledge that there is a saddle point in the step size where we optimize both uncertainty and completeness, in our case it appears to be the N=100 or N=$10^{2}$ step size.
+ We ran the program with the step sizes of n = 1, 2 , and 3, corresponding to a 10x10, 100x100, and 1000x1000 matrix. We also optimized our program through specialization. Diagonal matrix elements were set to 2 and off-diagonal elements were set to -1. FLOPS were reduced from 9 in the general case to 4 in the specialized case. The program was much more efficient, and faster as a consequence to the precalculation. 
 
-We ran the program with the step sizes of n = 1, 2 , and 3, corresponding to a 10x10, 100x100, and 1000x1000 matrix. 
+ Analyzing step size, there is a clear difference from N=$10^{1}$ and N=$10^{2}$, while N=$10^{2}$ to N=$10^{3}$ does not seem to superficially change as much as is demonstrated in the graphs below.
  
 %insert path specific for computer
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out1.pdf}
 	\label{uvx}
-	\caption{Comparison between different step sizes.  The x axis are the x values in the range [0,1] and the y axis are the resulting u values.}
+	\caption{ n = 1. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out2.pdf}
 	\label{uvx}
-	\caption{Comparison between different step sizes.  The x axis are the x values in the range [0,1] and the y axis are the resulting u values.}
+	\caption{n = 2. The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
 
 \begin{figure}[!ht]
 	\centering
 	\includegraphics[width=0.5\textwidth]{/Users/bruepark/Documents/GitHub/Physics480/project1/Report/out3.pdf}
 	\label{uvx}
-	\caption{Comparison between different step sizes.  The x axis are the x values in the range [0,1] and the y axis are the resulting u values.}
+	\caption{n =3.  The x axis is the x values in the range [0,1] and the y axis is the resulting u values.}
 \end{figure}
 
-We can further optimize our program by solving it for a special case, in which the diagonal matrix elements are equal to 2 and the off diagonal matrix elements are equal to -1.  This allows us to reduce the number of floating point operations per second (FLOPS) from an original 9 down to 4.  This allows us to run our program much faster by precalculating coefficients.
-
-
-
+Further investigation shows that the overabundance of data points does give us the full curve, it also results in a much larger error, as shown in Table 3. There seems to be a saddle point situated around N=$10^{2}$, wherein the calculation is optimized in regard to completeness of the graph and uncertainty from the numerical solution.
 
 \begin{center}
 	\begin{tabular}{cc}
@@ -122,10 +119,11 @@ We can further optimize our program by solving it for a special case, in which t
 	\end{tabular}
 \end{center}
 	
-	By including equation in our code, we can calculate the relative error for a certain step size.  The was done for multiple step sizes, $N=10^{n}$ n=1,...,7 (Table above).    It should be noted that these are the absolute values and averages of the errors.  It should also be noted that it breaks down for n=7, as there is a large fluctuation in the error between 10 and infinity.  It appears that n=6 is the largest order of step sizes that we can accurately use to describe the solutions to the function.
-	
-	We may also include a timer to calculate the time required to compute the solutions.  By adding a timing mechanism, we calculated the time required to solve square matrices with various column lengths.
-	
+	The above table shows us the absolute valued relative error results from varying step sizes of $N=10^{n}$ from 1 to 7. The step size error for n=7 seems to be the breaking point, the error starts to widely fluctuate. Therefore, the largest step size we would reccomend for an accurate result is n=6.  
+
+
+	For further analysis, we included a timer in both the specialized program and the LU program, and compared the timing values for, for as large square matrices as either could reasonably calculate.
+
 	\begin{center}
 		\begin{tabular}{ccc}
 			\hline \hline
@@ -142,13 +140,7 @@ We can further optimize our program by solving it for a special case, in which t
 			\label{timingtable}
 		\end{tabular}
 	\end{center}
-	
-	
-\begin{figure}[hbtp]
-
-\caption{Exact and numerial solutions for $n=10$ mesh points.} 
-\label{fig:n10points}
-\end{figure}
+	We found that specialized time was vastly more efficient over the LU time, as expected. We were unable to compute a LU matrix at $N=10^{4}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{7}$, ~400MB, we can assume that $N=10^{8}$ would not only take several hundred seconds to compute, but would result in a file size well over a GB, if not several. 	
 
 \section{Conclusions}
 
