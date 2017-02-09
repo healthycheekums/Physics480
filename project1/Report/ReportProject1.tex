@@ -13,7 +13,7 @@
 We present our Ferrari algorithm for solving linear equations. We wrote the one-dimensional Poisson equation, utilizing Dirichlet boundary conditions, as a linear set of equations and as a tridiagonal matrix. We compared a specialized algorithm for solving the tridiagonal matrix to an LU-decomposition of said matrix.  Our best algorithm, the specialized solver, runs as $4n$ FLOPS with $n$ the dimensionality of the matrix.
 \end{abstract}
 \maketitle
-
+\
 \section{Introduction}
 As an introduction to the central ideas of the class, we studied the one-dimensional Poisson equation with Dirichlet boundary conditions. Namely, transforming the differential equation into a set of linear equations, and consequently, a matrix. We implemented a general algorithm, a specialized algorithm, and a LU-decomposition algorithm. In the course of this report, we introduce the theoretical model and the different algorithms  we developed, then discuss the results of the different methods. Important points of comparison lie with relative error and relative speed of the calculation due to FLOPS. 
 
@@ -214,8 +214,6 @@ Further investigation shows that the overabundance of data points does give us t
 		\end{tabular}
 	\end{center}
 	We found that specialized time was around an order of magnitude faster than LU time, as expected, When we reached powers of $10^{4}$, the difference jumped several orders of magnitude. We were unable to compute a LU matrix at $N=10^{5}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{7}$, ~400MB, we can assume that $N=10^{8}$ would not only take 10 or more seconds to compute but would result in a file size well over a GB, if not several GB. Orders above this would only increase  file size and computation time.
-
-
 
 \section{Conclusions}
 	\subsection{Results}
