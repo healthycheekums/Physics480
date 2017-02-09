@@ -29,8 +29,7 @@ int main(int argc, char *argv[]){
         filename = argv[1]; // first command line argument after name of program
         exponent = atoi(argv[2]);
     }
-    clock_t start, finish; // declare start and final time
-    start = clock();
+
     
     // Loop over powers of 10
     for (int i = 1; i <= exponent; i++){
@@ -51,6 +50,10 @@ int main(int argc, char *argv[]){
       double *f = new double[n+1]; // right hand side
       double *x = new double[n+1]; // x value
       double *u = new double[n+1]; // solution
+   	  clock_t start, finish; // declare start and final time
+      start = clock();
+
+
       u[0] = 0.0; u[n] = 0.0; //u[0]=u[n]=0.0
       d[0] = d[n] = 2.0;
       for (int i =0; i <=n; i++){
@@ -64,6 +67,9 @@ int main(int argc, char *argv[]){
       //Backward Susbstitution
       u [n-1] = f[n-1]/d[n-1];
       for (int i = n-2; i >0; i--) u[i] =  (f[i]+u[i+1])/d[i];
+      finish = clock();
+      cout<<"Time:  "<<(double)(finish - start)/CLOCKS_PER_SEC <<endl;
+
 
       ofile.open(fileout);
       ofile << setiosflags(ios::showpoint | ios::uppercase);
@@ -77,8 +83,6 @@ int main(int argc, char *argv[]){
          ofile << setw(15) << setprecision(8) << log10(RelativeError) << endl;
       }
       delete [] x; delete [] d; delete [] f; delete [] u;
-      finish = clock();
-      cout<<"Time:  "<<(double)(finish - start)/CLOCKS_PER_SEC <<endl;
       ofile.close();
     }
     

@@ -1,3 +1,4 @@
+
 \documentclass[10pt,showpacs,preprintnumbers,footinbib,amsmath,amssymb,aps,prl,twocolumn,groupedaddress,superscriptaddress,showkeys]{revtex4-1}
 \usepackage{graphicx}
 \usepackage{dcolumn}
@@ -108,7 +109,29 @@ $\mathbf{A}$, the matrix can be decomposed into the product of  $\mathbf{U}$, up
 	\begin{equation} \mathbf{Ux=x} \end{equation}
 \section{Algorithms}	
 
+The matrix that represents the set of linear equations referred to in equation (2) appears as:
+\begin{center}
+		$\begin{bmatrix}
+			2 & -1 & 0 & 0 \\
+			-1 & 2 & -1 & 0 & \\
+			0 & -1 & 2 & -1   \\
+			0 & 0 & -1 & 2 
+		\end{bmatrix}$
+		 
+		\end{center}
+This form can be generalized to any size nxn matrix, where the diagonal elements $d_{i}$ each equal 2 and the off diagonal elements $e_{i}$ each equal -1.
+
+Equations (6) and (7), representative of forward and backwards substitution, can be generalized for this specific matrix, yielding:
+
+%	\begin{equation}
+%	 \tilde{d}_{i}=\frac{{i+1}{i}}
+%	\end{equation}
+
 \section{Methods}
+
+
+\section{Results and discussions}
+
 	\subsection{Relative error}
 
 In order to properly test the effectiveness of our algorithm, we are measuring the closeness, or relative error of our analytic solution:
@@ -118,8 +141,6 @@ In order to properly test the effectiveness of our algorithm, we are measuring t
 	\label{error}
 	\end{equation}
 $u_{i}$ is the analytic solution, and $v_{i}$ is the numerical solution.
-
-\section{Results and discussions}
 
  We ran the program with the step sizes of n = 1, 2 , and 3, corresponding to a 10x10, 100x100, and 1000x1000 matrix. We also optimized our program through specialization. Diagonal matrix elements were set to 2 and off-diagonal elements were set to -1. FLOPS were reduced from 9 in the general case to 4 in the specialized case. The program was much more efficient, and faster as a consequence to the precalculation. 
 
@@ -180,21 +201,28 @@ Further investigation shows that the overabundance of data points does give us t
 		\begin{tabular}{ccc}
 			\hline \hline
 			Column Size & Specialized Time (s) & LU Time (s)\\
-			\hline
-			10\textsuperscript{1} & 0.000430 & 0.00127\\
-			10\textsuperscript{2} & 0.001830 &  0.09897\\
-			10\textsuperscript{3} & 0.009720 & 31.4228\\
-			10\textsuperscript{4} & 0.0750       &  --\\
-			10\textsuperscript{5} & 0.7340  & --\\
-			10\textsuperscript{6} & 7.820  & --\\
-			10\textsuperscript{7} & 92.2239  & --\\
+			\hline		
+			10\textsuperscript{1} & $1.7 \cdot 10^{-5}$      & $1.48 \cdot 10^{-4}$  \\
+			10\textsuperscript{2} & $2.4 \cdot 10^{-5}$      &  $3.79 \cdot 10^{-4}$ \\
+			10\textsuperscript{3} & $2.12 \cdot 10^{-4}$    &  $9.25 \cdot 10^{-3}$  \\
+			10\textsuperscript{4} & $1.24 \cdot 10^{-3}$    &   1.18\\
+			10\textsuperscript{5} & $1.28 \cdot 10^{-2}$    & --\\
+			10\textsuperscript{6} & $1.26 \cdot 10^{-1}$    & --\\
+			10\textsuperscript{7} & 1.26                               & --\\
 			\hline
 			\label{timingtable}
 		\end{tabular}
 	\end{center}
-	We found that specialized time was vastly more efficient over the LU time, as expected. We were unable to compute a LU matrix at $N=10^{4}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{7}$, ~400MB, we can assume that $N=10^{8}$ would not only take several hundred seconds to compute, but would result in a file size well over a GB, if not several. 	
+	We found that specialized time was around an order of magnitude faster than LU time, as expected, When we reached powers of $10^{4}$, the difference jumped several orders of magnitude. We were unable to compute a LU matrix at $N=10^{5}$, initializing the program with this input would immediately sieze the program up. For the specialized solver, $N=10^{7}$ was the most reasonable limit, guessing at the size of the output file for $N=10^{7}$, ~400MB, we can assume that $N=10^{8}$ would not only take 10 or more seconds to compute but would result in a file size well over a GB, if not several GB. Orders above this would only increase  file size and computation time.
+
+
 
 \section{Conclusions}
+	\subsection{Results}
+	We investigated a few ways of solving a tridiagonal matrix problem. As expected, specialization outperforms generalized "brute force" methods. Specialization is faster, and in this case, can be taken out into greater orders of magnitude. Although there is improvement in this realm, we found that the propgation of numerical errors becomes unmanagable after a certain point. Our sweet spot was around the order of $10^{2}$.
+
+	\subsection{Future Prospects}
+	There may be a method to optimize the LU decomposition program, to allow for us to solve problems greater than $10^{4}$, it might be useful to look into this. 
 
 \begin{thebibliography}{99}
 \bibitem{miller2006} G.~A.~Miller, A.~K.~Opper, and E.~J.~Stephenson, Annu.~Rev.~Nucl.~Sci.~{\bf 56}, 253 (2006).
