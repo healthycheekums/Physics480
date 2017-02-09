@@ -41,21 +41,21 @@ This is general tridiagonal matrix:
 		$\begin{bmatrix}
 			d_{1}& e_{1} & 0 & 0 \\
 			e_{1} & d_{2} & e_{2} & 0 & \\
-			0 & e_{2} & d_{3} & e_{i-1}   \\
-			0 & 0 & e_{i-1} & d_{i} 
+			0 & e_{2} & d_{3} & e_{i-n}   \\
+			0 & 0 & e_{i-n} & d_{n} 
 	
 		\end{bmatrix}
 		 \begin{bmatrix}
 			u_{1} \\
 			u_{2} \\
 			u_{3} \\
-			u_{i} 
+			u_{n} 
 		\end{bmatrix} =
 		\begin{bmatrix}
 			v_{1} \\
 			v_{2} \\
 			v_{3} \\
-			v_{i}
+			v_{n}
 		\end{bmatrix}$
 		\end{center}
 
@@ -76,21 +76,21 @@ where $d_{i}$ are the diagonal matrix elements and $e_{i}$ are the off diagonal 
 		$\begin{bmatrix}
 			d_{1}& e_{1} & 0 & 0 \\
 			0 & \tilde{d}_{2} & e_{2} & 0 & \\
-			0 & 0 & \tilde{d}_{3} & e_{i-1}   \\
-			0 & 0 & 0 & \tilde{d}_{i} 
+			0 & 0 & \tilde{d}_{3} & e_{n-1}   \\
+			0 & 0 & 0 & \tilde{d}_{n} 
 	
 		\end{bmatrix}
 		 \begin{bmatrix}
 			u_{1} \\
 			u_{2} \\
 			u_{3} \\
-			u_{i} 
+			u_{n} 
 		\end{bmatrix} =
 		\begin{bmatrix}
 			v_{1} \\
 			v_{2} \\
 			v_{3} \\
-			v_{i}
+			v_{n}
 		\end{bmatrix}$
 		\end{center}
 	
@@ -98,19 +98,21 @@ where $d_{i}$ are the diagonal matrix elements and $e_{i}$ are the off diagonal 
 
 We were able to create another program that performed matrix mathematics to solve for the set of linear equations.  Taking a tridiagonal matrix, we can solve it using LU decomposition.
 	
+	\subsection{LU-decomposition}
 	
-	%\begin{figure}[!ht]
-	%		\centering
-	%		
-	%		\label{ludecomp}
-	%		\caption{The code to find the inverse of a matrix utilizing LU decomposition}
-	%	\end{figure}
-
+	\begin{equation} \mathbf{A=LU} \end{equation}
+$\mathbf{A}$, the matrix can be decomposed into the product of  $\mathbf{U}$, upper triangular matrix and $\mathbf{L}$, a lower triangular matrix
+	\begin{equation} \mathbf{LUx=b} \end{equation}
+	Which allows you to replace $\mathbf{A}$ and then use either triangular matrix to solve the problem.
+	\begin{equation} \mathbf{Ly=b} \end{equation}
+	\begin{equation} \mathbf{Ux=x} \end{equation}
 \section{Algorithms}	
 
 \section{Methods}
 	\subsection{Relative error}
+
 In order to properly test the effectiveness of our algorithm, we are measuring the closeness, or relative error of our analytic solution:
+
 	\begin{equation}
 	\epsilon_{i} = log_{10}(|\frac{v_{i}-u_{i}}{u_{i}}|)  ; i = 1,...,n
 	\label{error}
