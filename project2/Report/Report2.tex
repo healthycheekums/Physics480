@@ -244,7 +244,7 @@ This further reduced Schroedinger's equation to
 In our case, we treated $\omega_r$ as a parameter reflecting the strength of the oscillator potential, and used the values
 $\omega_r = 0.01$, $\omega_r = 0.5$, $\omega_r =1$, and $\omega_r = 5$ in our evaluations.
 
-        \subsection{Implementing an Jacobi Rotation Algorithm}
+        \subsection{Implementing the Jacobi Rotation Algorithm}
 Before we implemented the Jacobi algorithm, first we defined some basic nomenclature. We defined the quantities $\tan\theta = t= s/c$, with $s=\sin\theta$ and $c=\cos\theta$ and 
 \begin{equation*}\cot 2\theta=\tau = \frac{a_{ll}-a_{kk}}{2a_{kl}}.
 \end{equation*}
@@ -267,4 +267,8 @@ c = \frac{1}{\sqrt{1+t^2}},
 \end{equation*}
 and $s=tc$.  
 
+We started with an (n x n) orthogonal transformation matrix, with the stipulation that  $\bold{S^T}=\bold{S^{-1}}$.
+Nonzero matrix elements are:
+
+$s_{kk}=s_{ll}=c,s_{kl}=-s_{lk}=-s,s_{ii}=-s_{ii}= 1,  i\not{=}k, l$
 \end{document}
