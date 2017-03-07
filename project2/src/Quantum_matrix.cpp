@@ -169,24 +169,7 @@ int main(int argc, char *argv[]){
     cout << "Time:" << endl;
     cout << ( (finish - start)/(double) CLOCKS_PER_SEC ) << endl;
 
-    //creates text files with these outputs
-    ofstream myfile;
-    myfile.open ("exampleoutput.txt");
-    myfile << setiosflags(ios::showpoint | ios::uppercase);
 
-    myfile << "Matrix A (After Jacobi Rotation):" << endl;
-    myfile << A << endl;
-    myfile << "Eigenvalues from Armadillo:" << endl;
-    myfile << eigval << endl;
-    myfile << "Dot Product of One Eigenvectors (Before Jacobian Trans):" << q << endl;
-    //myfile << q << endl;
-    myfile << "Dot Product of Two Eigenvectors (Before Jacobian Trans):" << x << endl;
-    //myfile << x << endl;
-    myfile << "Dot Product of One Eigenvectors (After Jacobian Trans):" << w << endl;
-    //myfile << w << endl;
-    myfile << "Dot Product of Two Eigenvectors (After Jacobian Trans):" << c << endl;
-    //myfile << c << endl;
-    myfile.close();
 
     return 0;
 }
