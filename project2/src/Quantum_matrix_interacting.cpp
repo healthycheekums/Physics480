@@ -87,13 +87,13 @@ int main(int argc, char *argv[]){
       double h = (rho_max-rho_min)/(n);
       double hh = h*h;
       double hh_inv = 1.0/hh;
-
+      double omega = .01;
 
       vec rho(n); vec V(n);
       for(int i = 0; i<n ; i++){
 
           rho[i] = rho_min + (i+1)*h;
-          V[i] = rho[i]*rho[i];
+          V[i] = omega*omega*rho[i]*rho[i]+1/rho[i];
 
       }
 
